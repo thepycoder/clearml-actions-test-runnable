@@ -9,7 +9,7 @@ task = Task.init(
     task_name='dummy_task'
 )
 
-for i in tqdm(range(1000)):
+for i in tqdm(range(10)):
     task.get_logger().report_scalar(
         title="Iteration Reporting",
         series="Series 1",
