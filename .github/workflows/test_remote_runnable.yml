@@ -26,3 +26,6 @@ jobs:
           )"
       - name: Poll for task progress
         run: python check_clearml_task_running.py ${{ steps.launch_task.outputs.TASK_ID }}
+  
+  tag-as-master:
+    
