@@ -1,0 +1,13 @@
+name: Test if code is remotely runnable
+on: [push]
+
+jobs:
+  test-remote-runnable:
+    runs-on: python:3.10
+    steps:
+      - name: Install ClearML
+        run: python -m pip install --upgrade pip clearml
+      - name: Start the task
+        run: clearml-task --project "Github CI/CD" --name cicd_test --script task.py --requirements requirements.txt --skip-task-init --queue default
+      - name: Poll for task progress
+        run: python check_clearml_task_running.py
