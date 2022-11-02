@@ -4,6 +4,10 @@ on: [push]
 
 jobs:
   test-remote-runnable:
+    env:
+      CLEARML_API_ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
+      CLEARML_API_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      CLEARML_API_HOST: ${{ secrets.CLEARML_API_HOST }}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -20,13 +24,5 @@ jobs:
           echo "::set-output name=TASK_ID::$(
             clearml-task --project 'Github CI/CD' --name cicd_test --script task.py --requirements requirements.txt --skip-task-init --queue default | rg -o 'Task id=(.*) sent' -r '$1'
           )"
-        env:
-          CLEARML_API_ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
-          CLEARML_API_SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          CLEARML_API_HOST: ${{ secrets.CLEARML_API_HOST }}
       - name: Poll for task progress
         run: python check_clearml_task_running.py ${{ steps.launch_task.outputs.TASK_ID }}
-        env:
-          CLEARML_API_ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
-          CLEARML_API_SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          CLEARML_API_HOST: ${{ secrets.CLEARML_API_HOST }}
