@@ -86,6 +86,7 @@ def get_clearml_task_of_current_commit(commit_id):
 if __name__ == '__main__':
     # Main check: Does a ClearML task exist for this specific commit?
     print(f"Running on commit hash: {os.getenv('GITHUB_SHA')}")
+    print(os.environ)
     task_id = get_clearml_task_of_current_commit(os.getenv('GITHUB_SHA'))
     task = Task.get_task(task_id=task_id)
 
