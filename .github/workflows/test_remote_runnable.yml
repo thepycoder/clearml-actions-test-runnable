@@ -25,7 +25,7 @@ jobs:
             clearml-task --project 'Github CICD' --name cicd_test --script task.py --requirements requirements.txt --skip-task-init --queue default | rg -o 'Task id=(.*) sent' -r '$1'
           ) >> $GITHUB_OUTPUT"
       - name: Poll for task progress
-        run: python check_clearml_task_running.py ${{ steps.launch_task.outputs.TASK_ID }}
+        run: python check_clearml_task_running.py "${{ steps.launch_task.outputs.TASK_ID }}"
   
   tag-as-master:
     env:
