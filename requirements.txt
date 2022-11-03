@@ -1,3 +1,6 @@
 tqdm
 clearml
 wheel
+github3.py
+tabulate
+pandas
