@@ -1,10 +1,5 @@
 name: Test if code is remotely runnable
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-    types: [ assigned, opened, edited, reopened, synchronize ]
+on: ['pull_request_target']
 
 jobs:
   test-remote-runnable:
