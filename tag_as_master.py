@@ -1,3 +1,4 @@
+import os
 from clearml import Task
 
 
@@ -27,5 +28,5 @@ def tag_task(task_id):
 
 
 if __name__ == '__main__':
-    task_id = get_clearml_task_of_current_commit('5fad8a5369ba42df95fd603083a58808e53ffeac')
+    task_id = get_clearml_task_of_current_commit(os.getenv('GITHUB_SHA'))
     tag_task(task_id)

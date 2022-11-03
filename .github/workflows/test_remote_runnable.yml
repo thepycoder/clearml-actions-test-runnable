@@ -28,4 +28,20 @@ jobs:
         run: python check_clearml_task_running.py ${{ steps.launch_task.outputs.TASK_ID }}
   
   tag-as-master:
-    
+    env:
+      CLEARML_API_ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
+      CLEARML_API_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      CLEARML_API_HOST: ${{ secrets.CLEARML_API_HOST }}
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install ClearML
+        run: |
+          python -m pip install --upgrade pip clearml
+      - name: Start the task
+        id: launch_task
+        run: |
+          python tag_as_master.py
