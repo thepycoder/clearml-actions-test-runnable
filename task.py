@@ -3,14 +3,14 @@ import random
 from clearml import Task
 from tqdm import tqdm
 
-random.seed(1337)
-
 
 task = Task.init(
     project_name='Github CICD',
     task_name='dummy_task',
     reuse_last_task_id=False
 )
+
+random.seed()
 
 for i in tqdm(range(10)):
     task.get_logger().report_scalar(
