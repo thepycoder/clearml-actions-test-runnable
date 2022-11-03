@@ -83,11 +83,6 @@ def get_clearml_task_of_current_commit(commit_id):
 
 
 if __name__ == '__main__':
-    # Get the ClearML API Credentials
-    os.environ["CLEARML_API_ACCESS_KEY"] = os.getenv('CLEARML_API_ACCESS_KEY')
-    os.environ["CLEARML_API_SECRET_KEY"] = os.getenv('CLEARML_API_SECRET_KEY')
-    os.environ["CLEARML_API_HOST"] = os.getenv('CLEARML_API_HOST')
-
     # Main check: Does a ClearML task exist for this specific commit?
     task_id = get_clearml_task_of_current_commit(os.getenv('GITHUB_SHA'))
     task = Task.get_task(task_id=task_id)

@@ -32,10 +32,5 @@ def check_task_status(task_id, timeout=600):
 
 
 if __name__ == '__main__':
-    # get credentials and login info
-    os.environ["CLEARML_API_ACCESS_KEY"] = os.getenv('CLEARML_API_ACCESS_KEY')
-    os.environ["CLEARML_API_SECRET_KEY"] = os.getenv('CLEARML_API_SECRET_KEY')
-    os.environ["CLEARML_API_HOST"] = os.getenv('CLEARML_API_HOST')
     task_id = sys.argv[1]
-
     check_task_status(task_id)
