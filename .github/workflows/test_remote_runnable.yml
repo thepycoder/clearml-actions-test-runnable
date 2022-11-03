@@ -1,9 +1,5 @@
 name: Test if code is remotely runnable
-on:
-  pull_request:
-    branches:
-      - main
-#clearml-task --project "Github CICD" --name cicd_test --script task.py --requirements requirements.txt --skip-task-init --queue default | rg -o 'Task id=(.*) sent' -r '$1'
+on: ['push']
 
 jobs:
   test-remote-runnable:
