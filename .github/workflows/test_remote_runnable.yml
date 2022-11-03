@@ -46,7 +46,7 @@ jobs:
         run: |
           python tag_as_master.py
   
-  compare-model:
+  compare-models:
     env:
       CLEARML_API_ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
       CLEARML_API_SECRET_KEY: ${{ secrets.SECRET_KEY }}
@@ -63,4 +63,4 @@ jobs:
       - name: Start the task
         id: launch_task
         run: |
-          python compare_model.py
+          python compare_models.py
