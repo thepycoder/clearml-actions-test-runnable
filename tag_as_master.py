@@ -46,15 +46,16 @@ def create_stats_comment(project_stats):
     payload_fname = os.getenv('GITHUB_EVENT_PATH')
     with open(payload_fname, 'r') as f:
         payload = json.load(f)
+    print(payload)
     owner, repo = payload.get("repository", {}).get("full_name", "").split("/")
     if owner and repo:
         gh = login(token=os.getenv("GH_TOKEN"))
         if gh:
-            pull_request = gh.pull_request(owner, repo, payload.get("pull_request", {}).get("number"))
+            pull_request = gh.pull_request(owner, repo, payload.get("number"))
             if pull_request:
                 pull_request.create_comment(project_stats)
             else:
-                print(f'Can not comment PR, {payload.get("issue", {}).get("number")}')
+                print(f'Can not comment PR, {payload.get("number")}')
         else:
             print(f"Can not log in to gh, {os.getenv('GH_TOKEN')}")
 
