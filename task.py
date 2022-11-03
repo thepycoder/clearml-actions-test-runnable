@@ -3,7 +3,7 @@ import random
 from clearml import Task
 from tqdm import tqdm
 
-random.seed(42)
+random.seed(1337)
 
 
 task = Task.init(
