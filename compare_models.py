@@ -22,6 +22,5 @@ def compare_and_tag_task(commit_hash):
 
 
 if __name__ == '__main__':
-    print(f"Running on commit hash: {os.getenv('GITHUB_SHA')}")
-    print(os.environ)
-    compare_and_tag_task(os.getenv('GITHUB_SHA'))
+    print(f"Running on commit hash: {os.getenv('COMMIT_ID')}")
+    compare_and_tag_task(os.getenv('COMMIT_ID'))

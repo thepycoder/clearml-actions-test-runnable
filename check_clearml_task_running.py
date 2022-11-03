@@ -33,5 +33,4 @@ def check_task_status(task_id, timeout=600):
 
 if __name__ == '__main__':
     task_id = sys.argv[1]
-    print(os.environ)
     check_task_status(task_id)
