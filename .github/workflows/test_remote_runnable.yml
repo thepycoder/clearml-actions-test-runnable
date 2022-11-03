@@ -1,6 +1,5 @@
 name: Test if code is remotely runnable
-on:
-  push:
+on: ['push']
 
 jobs:
   test-remote-runnable:
