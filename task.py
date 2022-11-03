@@ -3,6 +3,8 @@ import random
 from clearml import Task
 from tqdm import tqdm
 
+random.seed(42)
+
 
 task = Task.init(
     project_name='Github CICD',
