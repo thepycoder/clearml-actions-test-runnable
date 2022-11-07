@@ -24,7 +24,7 @@ jobs:
       - name: Start the task
         id: launch_task
         run: |
-          python tag_stats_to_comment.py
+          python task_stats_to_comment.py
 
   compare-models:
     env:
