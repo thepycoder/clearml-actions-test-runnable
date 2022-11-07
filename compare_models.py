@@ -6,7 +6,7 @@ from task_stats_to_comment import get_clearml_task_of_current_commit
 
 def compare_and_tag_task(commit_hash):
     """Compare current performance to best previous performance and only allow equal or better."""
-    current_task = Task.get_task(task_id=get_clearml_task_of_current_commit(commit_hash))
+    current_task = get_clearml_task_of_current_commit(commit_hash)
     best_task = Task.get_task(project_name='Github CICD', task_name='cicd_test', tags=['Best Performance'])
     if best_task:
         best_metric = max(
@@ -15,9 +15,12 @@ def compare_and_tag_task(commit_hash):
         current_metric = max(
             current_task.get_reported_scalars().get('Performance Metric').get('Series 1').get('y')
         )
+        print(f"Best metric in the system is: {best_metric} and current metric is {current_metric}")
         if current_metric >= best_metric:
+            print("This means current metric is better or equal! Tagging as such.")
             current_task.add_tags(['Best Performance'])
-            # best_task.remove_tags(['Best Performance'])
+        else:
+            print("This means current metric is worse! Not tagging.")
     else:
         current_task.add_tags(['Best Performance'])
 

@@ -78,23 +78,23 @@ def get_clearml_task_of_current_commit(commit_id):
         },
         additional_return_fields=['script.diff']
     )
-    
+
     # If there are tasks, check which one has no diff: aka which one was run with the exact
     # code that is staged in this PR.
     if tasks:
         for task in tasks:
             if not task['script.diff']:
-                return task['id']
+                return Task.get_task(task_id=task['id'])
 
     # If no task was run yet with the exact PR code, raise an error and block the PR.
-    raise ValueError("No task based on this code was found in ClearML. Make sure to run it at least once before merging.")
+    raise ValueError("No task based on this code was found in ClearML."
+                     "Make sure to run it at least once before merging.")
 
 
 if __name__ == '__main__':
     # Main check: Does a ClearML task exist for this specific commit?
     print(f"Running on commit hash: {os.getenv('COMMIT_ID')}")
-    task_id = get_clearml_task_of_current_commit(os.getenv('COMMIT_ID'))
-    task_obj = Task.get_task(task_id=task_id)
+    task_obj = get_clearml_task_of_current_commit(os.getenv('COMMIT_ID'))
 
     # If the task exists, we can tag it as such, so we know in the interface which one it is.
     task_obj.add_tags(['main_branch'])
