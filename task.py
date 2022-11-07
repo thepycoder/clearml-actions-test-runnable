@@ -5,7 +5,7 @@ from tqdm import tqdm
 
 
 task = Task.init(
-    project_name='Github CICD',
+    project_name='Github CICD Video',
     task_name='dummy_task',
     reuse_last_task_id=False
 )
