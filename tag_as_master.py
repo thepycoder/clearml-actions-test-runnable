@@ -8,6 +8,7 @@ from tabulate import tabulate
 
 
 def create_output_tables(retrieve_scalars_dict):
+    """Extract data from ClearML into format for tabulation."""
     data = []
     for graph_title, graph_values in retrieve_scalars_dict.items():
         graph_data = []
@@ -17,22 +18,8 @@ def create_output_tables(retrieve_scalars_dict):
     return sorted(data, key=lambda output: (output[0], output[1]))
 
 
-def get_task_stats(task):
-    task_status = task.get_status()
-    # Try to get the task stats
-    if task_status == "completed":
-        table = create_comment_output(task, task_status)
-        if table:
-            return f"Results\n\n{table}\n\n" \
-                    f"You can view full task results [here]({task.get_output_log_web_page()})"
-        else:
-            return f"Something went wrong when creating the task table. Check full task [here]({task.get_output_log_web_page()})"
-    # Update the user about the task status, can not get any stats
-    else:
-        return f"Task is in {task_status} status, this should not happen!"
-
-
 def create_comment_output(task, status):
+    """Create a markdown table from a ClearML task's output scalars."""
     retrieve_scalars_dict = task.get_last_scalar_metrics()
     if retrieve_scalars_dict:
         scalars_tables = create_output_tables(retrieve_scalars_dict)
@@ -43,6 +30,7 @@ def create_comment_output(task, status):
 
 
 def create_stats_comment(project_stats):
+    """Create a comment on the current PR containing the ClearML task stats."""
     payload_fname = os.getenv('GITHUB_EVENT_PATH')
     with open(payload_fname, 'r') as f:
         payload = json.load(f)
@@ -59,7 +47,26 @@ def create_stats_comment(project_stats):
         else:
             print(f"Can not log in to gh, {os.getenv('GH_TOKEN')}")
 
+
+def get_task_stats(task):
+    """Get the comment markdown for a stats table based on the task object."""
+    task_status = task.get_status()
+    # Try to get the task stats
+    if task_status == "completed":
+        table = create_comment_output(task, task_status)
+        if table:
+            return f"Results\n\n{table}\n\n" \
+                    f"You can view full task results [here]({task.get_output_log_web_page()})"
+        else:
+            return (f"Something went wrong when creating the task table. "
+                    f"Check full task [here]({task.get_output_log_web_page()})")
+    # Update the user about the task status, can not get any stats
+    else:
+        return f"Task is in {task_status} status, this should not happen!"
+
+
 def get_clearml_task_of_current_commit(commit_id):
+    """Find the ClearML task that correspond to the exact codebase in the commit ID."""
     # Get the ID and Diff of all tasks based on the current commit hash, order by newest
     tasks = Task.query_tasks(
         task_filter={
@@ -87,12 +94,12 @@ if __name__ == '__main__':
     # Main check: Does a ClearML task exist for this specific commit?
     print(f"Running on commit hash: {os.getenv('COMMIT_ID')}")
     task_id = get_clearml_task_of_current_commit(os.getenv('COMMIT_ID'))
-    task = Task.get_task(task_id=task_id)
+    task_obj = Task.get_task(task_id=task_id)
 
     # If the task exists, we can tag it as such, so we know in the interface which one it is.
-    task.add_tags(['main_branch'])
+    task_obj.add_tags(['main_branch'])
 
     # Let's also add the task metrics to the PR automatically.
     # Get the metrics from the task and create a comment on the PR.
-    stats = get_task_stats(task)
+    stats = get_task_stats(task_obj)
     create_stats_comment(stats)

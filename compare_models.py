@@ -5,6 +5,7 @@ from tag_as_master import get_clearml_task_of_current_commit
 
 
 def compare_and_tag_task(commit_hash):
+    """Compare current performance to best previous performance and only allow equal or better."""
     current_task = Task.get_task(task_id=get_clearml_task_of_current_commit(commit_hash))
     best_task = Task.get_task(project_name='Github CICD', task_name='cicd_test', tags=['Best Performance'])
     if best_task:

@@ -1,4 +1,4 @@
-name: Test if code is remotely runnable
+name: ClearML Checks
 on:
   pull_request:
     branches: [ main ]
