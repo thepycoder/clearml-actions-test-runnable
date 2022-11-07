@@ -1,7 +1,7 @@
 import os
 from clearml import Task
 
-from tag_as_master import get_clearml_task_of_current_commit
+from task_stats_to_comment import get_clearml_task_of_current_commit
 
 
 def compare_and_tag_task(commit_hash):
