@@ -15,4 +15,5 @@ jobs:
             CLEARML_API_SECRET_KEY: ${{ secrets.SECRET_KEY }}
             CLEARML_API_HOST: ${{ secrets.CLEARML_API_HOST }}
             GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          env:
             COMMIT_ID: ${{ github.event.pull_request.head.sha }}
