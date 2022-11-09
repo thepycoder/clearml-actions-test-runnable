@@ -1,0 +1,18 @@
+name: Compare models
+on:
+  pull_request:
+    branches: [ main ]
+    types: [ assigned, opened, edited, reopened, synchronize ]
+
+jobs:
+  compare-models:
+      runs-on: ubuntu-20.04
+      steps:
+        - name: Compare models
+          uses: thepycoder/clearml-actions-compare-models@main
+          with:
+            CLEARML_API_ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
+            CLEARML_API_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+            CLEARML_API_HOST: ${{ secrets.CLEARML_API_HOST }}
+          env:
+            COMMIT_ID: ${{ github.event.pull_request.head.sha }}
