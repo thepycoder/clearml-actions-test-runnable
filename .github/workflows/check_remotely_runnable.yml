@@ -15,6 +15,6 @@ jobs:
             CLEARML_API_SECRET_KEY: ${{ secrets.SECRET_KEY }}
             CLEARML_API_HOST: ${{ secrets.CLEARML_API_HOST }}
             CLEARML_TIMEOUT: 10
-            CLEARML_QUEUE: GPU Queue
+            CLEARML_QUEUE: 'GPU Queue'
           env:
             COMMIT_ID: ${{ github.event.pull_request.head.sha }}
