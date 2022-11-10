@@ -16,5 +16,6 @@ jobs:
             CLEARML_API_HOST: ${{ secrets.CLEARML_API_HOST }}
             GH_TOKEN: ${{ secrets.GH_TOKEN }}
             CLEARML_PROJECT: 'non_existing_project'
+            CLEARML_TASK_NAME: 'non_existing_task_name'
           env:
             COMMIT_ID: ${{ github.event.pull_request.head.sha }}
