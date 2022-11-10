@@ -14,10 +14,10 @@ jobs:
             CLEARML_API_ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
             CLEARML_API_SECRET_KEY: ${{ secrets.SECRET_KEY }}
             CLEARML_API_HOST: ${{ secrets.CLEARML_API_HOST }}
-            CLEARML_PROJECT: 'my_project'
-            CLEARML_TASK_NAME: 'my_task'
+            CLEARML_PROJECT: 'Github CICD'
+            CLEARML_TASK_NAME: 'dummy_task'
             CLEARML_SCALAR_TITLE: 'Performance Metrics'
-            CLEARML_SCALAR_SERIES: 'mAP'
+            CLEARML_SCALAR_SERIES: 'Series 1'
             CLEARML_BEST_TAGNAME: 'GOODEST BOI'
           env:
             COMMIT_ID: ${{ github.event.pull_request.head.sha }}
