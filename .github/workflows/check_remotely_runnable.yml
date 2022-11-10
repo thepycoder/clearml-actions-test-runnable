@@ -17,4 +17,3 @@ jobs:
             CLEARML_TIMEOUT: 600
             CLEARML_AGENT_QUEUE: 'GPU Queue'
             CLEARML_AGENT_ENTRYPOINT: 'task.py'
-            CLEARML_AGENT_ARGS: 'arg1=foo arg2=bar'
