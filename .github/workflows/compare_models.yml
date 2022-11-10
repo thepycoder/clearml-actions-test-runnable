@@ -16,7 +16,7 @@ jobs:
             CLEARML_API_HOST: ${{ secrets.CLEARML_API_HOST }}
             CLEARML_PROJECT: 'Github CICD'
             CLEARML_TASK_NAME: 'dummy_task'
-            CLEARML_SCALAR_TITLE: 'Performance Metrics'
+            CLEARML_SCALAR_TITLE: 'Performance Metric'
             CLEARML_SCALAR_SERIES: 'Series 1'
             CLEARML_BEST_TAGNAME: 'GOODEST BOI'
           env:
