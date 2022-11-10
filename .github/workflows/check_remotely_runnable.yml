@@ -15,4 +15,8 @@ jobs:
             CLEARML_API_SECRET_KEY: ${{ secrets.SECRET_KEY }}
             CLEARML_API_HOST: ${{ secrets.CLEARML_API_HOST }}
             CLEARML_TIMEOUT: 600
-            CLEARML_QUEUE: 'GPU Queue'
+            CLEARML_AGENT_QUEUE: 'GPU Queue'
+            CLEARML_AGENT_ENTRYPOINT: 'task.py'
+            CLEARML_AGENT_ARGS:
+              - arg1=foo
+              - arg2=bar
