@@ -18,6 +18,7 @@ jobs:
             CLEARML_TASK_NAME: 'dummy_task'
             CLEARML_SCALAR_TITLE: 'Performance Metric'
             CLEARML_SCALAR_SERIES: 'Series 1'
+            CLEARML_SCALAR_MIN_MAX: 'MAX'
             CLEARML_BEST_TAGNAME: 'GOODEST BOI'
           env:
             COMMIT_ID: ${{ github.event.pull_request.head.sha }}
