@@ -9,7 +9,7 @@ jobs:
       runs-on: ubuntu-20.04
       steps:
         - name: Get task stats
-          uses: thepycoder/clearml-actions-get-stats@main
+          uses: allegroai/clearml-actions-get-stats@main
           with:
             CLEARML_API_ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
             CLEARML_API_SECRET_KEY: ${{ secrets.SECRET_KEY }}
