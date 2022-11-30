@@ -1,19 +1,20 @@
-name: Check remotely runnable
+name: Verify code execution
 on:
   pull_request:
     branches: [ main ]
     types: [ assigned, opened, edited, reopened, synchronize ]
 
 jobs:
-  check-remotely-runnable:
+  verify-code-execution:
       runs-on: ubuntu-20.04
       steps:
         - name: Check remotely runnable
           uses: allegroai/clearml-actions-check-remotely-runnable@main
           with:
+            QUEUE_NAME: 'GPU Queue' # EDIT ME TO YOUR OWN QUEUE NAME
+            EXECUTION_ENTRYPOINT: 'task.py' # EDIT ME TO YOUR OWN SCRIPT NAME
+            EXECUTION_ARGS: 'arg1=foo arg2=bar' # EDIT ME TO YOUR OWN ARGS
             CLEARML_API_ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
             CLEARML_API_SECRET_KEY: ${{ secrets.SECRET_KEY }}
             CLEARML_API_HOST: ${{ secrets.CLEARML_API_HOST }}
             EXECUTION_TIMEOUT: 600
-            QUEUE_NAME: 'GPU Queue'
-            EXECUTION_ENTRYPOINT: 'task.py'
