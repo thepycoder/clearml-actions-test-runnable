@@ -1,0 +1,21 @@
+name: Get task stats
+on:
+  pull_request:
+    branches: [ main ]
+    types: [ assigned, opened, edited, reopened, synchronize ]
+
+jobs:
+  task-stats-to-comment:
+      runs-on: ubuntu-20.04
+      steps:
+        - name: Get task stats
+          uses: allegroai/clearml-actions-get-stats@main
+          with:
+            CLEARML_API_ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
+            CLEARML_API_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+            CLEARML_API_HOST: ${{ secrets.CLEARML_API_HOST }}
+            GH_TOKEN: ${{ secrets.GH_TOKEN }}
+            CLEARML_PROJECT: 'Github CICD'
+            CLEARML_TASK_NAME: 'dummy_task'
+          env:
+            COMMIT_ID: ${{ github.event.pull_request.head.sha }}
