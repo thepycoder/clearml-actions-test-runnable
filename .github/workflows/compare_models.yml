@@ -1,24 +1,25 @@
-name: Compare models
+name: Detect model degradation
 on:
   pull_request:
     branches: [ main ]
     types: [ assigned, opened, edited, reopened, synchronize ]
 
 jobs:
-  compare-models:
+  detect-model-degradation:
       runs-on: ubuntu-20.04
       steps:
         - name: Compare models
-          uses: allegroai/clearml-actions-compare-models@main
+          uses: thepycoder/clearml-actions-detect-model-degradation@main
           with:
+            CLEARML_PROJECT: 'my_project' # CHANGE ME
+            CLEARML_TASK_NAME: 'my_task' # CHANGE ME
+            CLEARML_SCALAR_TITLE: 'Performance Metrics' # CHANGE ME
+            CLEARML_SCALAR_SERIES: 'mAP' # CHANGE ME
+            CLEARML_SCALAR_MIN_MAX: 'MAX' # CHANGE ME
+            CLEARML_BEST_TAGNAME: 'BESTEST MODEL' # CHANGE ME (OR NOT ^^)
+            CLEARML_SCALAR_THRESHOLD: 3 # CHANGE ME
             CLEARML_API_ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
             CLEARML_API_SECRET_KEY: ${{ secrets.SECRET_KEY }}
             CLEARML_API_HOST: ${{ secrets.CLEARML_API_HOST }}
-            CLEARML_PROJECT: 'Github CICD'
-            CLEARML_TASK_NAME: 'dummy_task'
-            CLEARML_SCALAR_TITLE: 'Performance Metric'
-            CLEARML_SCALAR_SERIES: 'Series 1'
-            CLEARML_SCALAR_MIN_MAX: 'MAX'
-            CLEARML_BEST_TAGNAME: 'BESTEST MODEL'
           env:
             COMMIT_ID: ${{ github.event.pull_request.head.sha }}
