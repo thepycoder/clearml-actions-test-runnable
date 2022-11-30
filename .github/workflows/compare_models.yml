@@ -9,7 +9,7 @@ jobs:
       runs-on: ubuntu-20.04
       steps:
         - name: Compare models
-          uses: thepycoder/clearml-actions-detect-model-degradation@main
+          uses: allegroai/clearml-actions-detect-model-degradation@main
           with:
             CLEARML_PROJECT: 'my_project' # CHANGE ME
             CLEARML_TASK_NAME: 'my_task' # CHANGE ME
