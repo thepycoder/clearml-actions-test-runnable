@@ -11,10 +11,10 @@ jobs:
         - name: Compare models
           uses: allegroai/clearml-actions-detect-model-degradation@main
           with:
-            CLEARML_PROJECT: 'my_project' # CHANGE ME
-            CLEARML_TASK_NAME: 'my_task' # CHANGE ME
-            CLEARML_SCALAR_TITLE: 'Performance Metrics' # CHANGE ME
-            CLEARML_SCALAR_SERIES: 'mAP' # CHANGE ME
+            CLEARML_PROJECT: 'Github CICD' # CHANGE ME
+            CLEARML_TASK_NAME: 'dummy_task' # CHANGE ME
+            CLEARML_SCALAR_TITLE: 'Performance Metric' # CHANGE ME
+            CLEARML_SCALAR_SERIES: 'Series 1' # CHANGE ME
             CLEARML_SCALAR_MIN_MAX: 'MAX' # CHANGE ME
             CLEARML_BEST_TAGNAME: 'BESTEST MODEL' # CHANGE ME (OR NOT ^^)
             CLEARML_SCALAR_THRESHOLD: 3 # CHANGE ME
