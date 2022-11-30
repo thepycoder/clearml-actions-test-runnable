@@ -1,11 +1,11 @@
-name: Get task stats
+name: Display model performance
 on:
   pull_request:
     branches: [ main ]
     types: [ assigned, opened, edited, reopened, synchronize ]
 
 jobs:
-  task-stats-to-comment:
+  display-model-performance: # Rename full repo as well
       runs-on: ubuntu-20.04
       steps:
         - name: Get task stats
@@ -15,7 +15,5 @@ jobs:
             CLEARML_API_SECRET_KEY: ${{ secrets.SECRET_KEY }}
             CLEARML_API_HOST: ${{ secrets.CLEARML_API_HOST }}
             GH_TOKEN: ${{ secrets.GH_TOKEN }}
-            CLEARML_PROJECT: 'Github CICD'
-            CLEARML_TASK_NAME: 'dummy_task'
           env:
             COMMIT_ID: ${{ github.event.pull_request.head.sha }}
